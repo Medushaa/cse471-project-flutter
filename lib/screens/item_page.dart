@@ -12,22 +12,22 @@ class ItemPage extends StatefulWidget {
 }
 
 class _ItemPageState extends State<ItemPage> {
-  User? user = FirebaseAuth.instance.currentUser;
-  UserModel loggedInUser = UserModel();
+  // User? user = FirebaseAuth.instance.currentUser;
+  // UserModel loggedInUser = UserModel();
 
   @override
-  void initState() {
-    super.initState();
+  // void initState() {
+  //   super.initState();
 
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(user!.uid)
-        .get()
-        .then((value) {
-      this.loggedInUser = UserModel.fromMap(value.data());
-      setState(() {});
-    });
-  }
+  //   FirebaseFirestore.instance
+  //       .collection("users")
+  //       .doc(user!.uid)
+  //       .get()
+  //       .then((value) {
+  //     this.loggedInUser = UserModel.fromMap(value.data());
+  //     setState(() {});
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
