@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
   int currentIndex = 0;
-  final screens = [ItemPage(), DonationPage(), BlogPage(), ProfilePage()];
+  final screens = [new ItemPage(), new DonationPage(), new BlogPage(), new ProfilePage()];
   @override
   Widget build(BuildContext context) => Scaffold(
         body: IndexedStack(

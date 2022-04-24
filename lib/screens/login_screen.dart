@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:food_um_try1/screens/home_page.dart';
 import 'package:food_um_try1/screens/registration_screen.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -219,12 +220,11 @@ class _LoginScreenState extends State<LoginScreen> {
   //login function
   void signIn(String email, String password) async {
     if (_formKey.currentState!.validate()) {
-
       //keep userloged in
       // final SharedPreferences sharedPreferences =
-      //   await SharedPreferences.getInstance();
-      // sharedPreferences.setString('email', emailController.text);
-
+      //     await SharedPreferences.getInstance();
+      // sharedPreferences.setString('email', email);
+      // Get.to(HomeScreen());
 
       //excute only if validation ok
       await _auth
