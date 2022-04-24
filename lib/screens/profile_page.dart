@@ -38,13 +38,14 @@ class _ProfilePageState extends State<ProfilePage> {
         appBar: AppBar(
           toolbarHeight: 70,
           backgroundColor: Color.fromARGB(255, 238, 127, 0),
-          leading: Icon(Icons.favorite),
-          title: Text('Donation Page',
+          leading: Icon(Icons.person),
+          title: Text("Profile: ${loggedInUser.name}",
             style: TextStyle(
               fontSize: 25,
             ),
           ),
         ),
+        
         body: Center(
         child: Padding(
           padding: EdgeInsets.all(20),
@@ -52,26 +53,26 @@ class _ProfilePageState extends State<ProfilePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text(
-                "Welcome Back",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text("${loggedInUser.name}",
+              SizedBox(height: 10),
+              Text("Name: ${loggedInUser.name}",
                   style: TextStyle(
+                    fontSize: 20,
                     color: Colors.black,
                     fontWeight: FontWeight.w500,
                   )),
-              Text("${loggedInUser.email}",
+              Text("Phone: ${loggedInUser.phone}",
                   style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                  )),
+              Text("Email: ${loggedInUser.email}",
+                  style: TextStyle(
+                    fontSize: 20,
                     color: Colors.black54,
                     fontWeight: FontWeight.w500,
                   )),
-              SizedBox(
-                height: 15,
-              ),
+              SizedBox(height: 10),
               ActionChip(
                   label: Text("Logout"),
                   onPressed: () {
