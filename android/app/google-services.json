@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "301666075918",
+    "project_id": "foodum-login",
+    "storage_bucket": "foodum-login.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301666075918:android:16b662e59960a3db59035f",
+        "android_client_info": {
+          "package_name": "com.example.food_um_try1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "301666075918-7l42l9o9n8iaabh91f0m9mg6l3ug3hjh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.food_um_try1",
+            "certificate_hash": "3187da4857124e48dd7d6f58a999410ec3be25b1"
+          }
+        },
+        {
+          "client_id": "301666075918-jmapcstlimd7f8jam2aed4ntc75qg8d3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL8fWP_TYURu3cxwvN_TNrSlrtjri_9E0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "301666075918-jmapcstlimd7f8jam2aed4ntc75qg8d3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
