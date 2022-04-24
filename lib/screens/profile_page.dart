@@ -1,26 +1,93 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_um_try1/screens/home_page.dart';
+import 'package:food_um_try1/screens/login_screen.dart';
+import 'package:food_um_try1/screens/model/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({ Key? key }) : super(key: key);
+
   @override
-  Widget build(BuildContext context) => Scaffold(
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value){
+          this.loggedInUser = UserModel.fromMap(value.data());
+          setState(() {});
+        });
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
         appBar: AppBar(
           toolbarHeight: 70,
           backgroundColor: Color.fromARGB(255, 238, 127, 0),
-          leading: Icon(Icons.person),
-          title: Text(
-            'Profile',
+          leading: Icon(Icons.favorite),
+          title: Text('Donation Page',
             style: TextStyle(
               fontSize: 25,
             ),
           ),
-          actions: [
-            Icon(Icons.more_vert),
-          ],
         ),
         body: Center(
-            child: Text("Profile",
-                //"${loggedInUser.name} ${loggedInUser.email}",
-                style: TextStyle(fontSize: 60))),
-      );
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                "Welcome Back",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text("${loggedInUser.name}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                  )),
+              Text("${loggedInUser.email}",
+                  style: TextStyle(
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w500,
+                  )),
+              SizedBox(
+                height: 15,
+              ),
+              ActionChip(
+                  label: Text("Logout"),
+                  onPressed: () {
+                    logout(context);
+                  }),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+    // the logout function
+  Future<void> logout (BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => LoginScreen()));
+  }
 }
