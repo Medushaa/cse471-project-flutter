@@ -7,7 +7,7 @@ class DonationPage extends StatelessWidget {
           toolbarHeight: 70,
           backgroundColor: Color.fromARGB(255, 238, 127, 0),
           leading: Icon(Icons.favorite),
-          title: Text('Donation Page',
+          title: Text('Donation  Bhallage Page',
             style: TextStyle(
               fontSize: 25,
             ),
