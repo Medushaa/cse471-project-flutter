@@ -31,12 +31,16 @@ dependencies:
   cloud_firestore: ^3.1.13
   cupertino_icons: ^1.0.2
   date_field: ^3.0.0
+  date_format: ^2.0.6
+  did_change_dependencies: ^1.0.0
   firebase_auth: ^3.3.15
   firebase_core: ^1.15.0
+  firebase_instance_id: ^1.0.0
   flutter:
     sdk: flutter
   fluttertoast: ^8.0.9
   get: ^4.6.1
+  intl: ^0.17.0
   shared_preferences: ^2.0.13
 
 dev_dependencies:

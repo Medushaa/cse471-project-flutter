@@ -1,26 +1,16 @@
 class itemModel {
-  String? itemuid;
-  String? itemname;
-  DateTime? expiry;
+  String? itemName;
+  DateTime? expirydate;
 
-  itemModel({this.itemuid, this.itemname, this.expiry});
-
-  // receiving data from server
-  factory itemModel.fromMap(map) {
-    return itemModel(
-      itemuid: map['itemuid'],
-      itemname: map['itemname'],
-      expiry: map['expiry'],
-    );
-  }
+  itemModel();
 
   // sending data to our server
-  Map<String, dynamic> toMap() {
-    return {
-      'itemuid': itemuid,
-      'itemname': itemname,
-      'expiry': expiry,
-
+  Map<String, dynamic> toJson() => {
+      'itemName': itemName,
+      'expirydate': expirydate,
     };
-  }
+
+  itemModel.fromSnapshot(snapshot)
+      : itemName = snapshot.data()['itemName'],
+        expirydate = snapshot.data()['expirydate'].toDate();
 }

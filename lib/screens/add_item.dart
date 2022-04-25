@@ -4,20 +4,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:food_um_try1/screens/home_page.dart';
+import 'package:food_um_try1/screens/item_page.dart';
 import 'package:food_um_try1/screens/model/item_model.dart';
 import 'package:food_um_try1/screens/model/user_model.dart';
-
+import 'package:get/get.dart';
 
 class AddItemScreen extends StatefulWidget {
-  const AddItemScreen({ Key? key }) : super(key: key);
+  const AddItemScreen({Key? key}) : super(key: key);
 
   @override
   State<AddItemScreen> createState() => _AddItemScreenState();
 }
 
-
 class _AddItemScreenState extends State<AddItemScreen> {
-
   final _auth = FirebaseAuth.instance;
 
   User? user = FirebaseAuth.instance.currentUser;
@@ -30,13 +29,13 @@ class _AddItemScreenState extends State<AddItemScreen> {
         .collection("users")
         .doc(user!.uid)
         .get()
-        .then((value){
-          this.loggedInUser = UserModel.fromMap(value.data());
-          setState(() {});
-        });
+        .then((value) {
+      this.loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
   }
-  
-  //DateTime _selectedDate;
+
+  late DateTime selectedDT;
 
   //form key
   final _formKey = GlobalKey<FormState>();
@@ -44,13 +43,9 @@ class _AddItemScreenState extends State<AddItemScreen> {
   //editing controller
   final ItemNameEditingController = new TextEditingController();
   final ExpiryDateEditingController = new TextEditingController();
-  
 
-
-  
   @override
-  Widget build(BuildContext context){
-
+  Widget build(BuildContext context) {
     //name field
     final ItemNameField = TextFormField(
         autofocus: false,
@@ -79,7 +74,6 @@ class _AddItemScreenState extends State<AddItemScreen> {
           ),
         ));
 
-    
     final ExpiryDateField = DateTimeFormField(
       decoration: const InputDecoration(
         hintStyle: TextStyle(color: Colors.black45),
@@ -93,9 +87,9 @@ class _AddItemScreenState extends State<AddItemScreen> {
       validator: (e) => (e?.day ?? 0) == 1 ? 'Please not the first day' : null,
       onDateSelected: (DateTime value) {
         print(value);
+        selectedDT = value;
       },
     );
-          
 
     //button
     final AddItemButton = Material(
@@ -105,14 +99,19 @@ class _AddItemScreenState extends State<AddItemScreen> {
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
-        onPressed: () { 
+        onPressed: () {
+          FirebaseFirestore.instance.collection('users').doc(loggedInUser.uid).collection('items').add({
+            'itemName': ItemNameEditingController.text,
+            'expirydate': selectedDT,
+            // 'uid': loggedInUser.uid
+          });
 
-          FirebaseFirestore.instance
-            .collection('items')
-            .add({'itemName': ItemNameEditingController.text, 'expirydate': ExpiryDateEditingController.text, 'uid': loggedInUser.uid});
-
-            //AddItem(ItemNameEditingController.text, ExpiryDateEditingController.text);
-          }, 
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+          );
+          //AddItem(ItemNameEditingController.text, ExpiryDateEditingController.text);
+        },
         child: Text(
           "Confirm",
           textAlign: TextAlign.center,
@@ -130,11 +129,8 @@ class _AddItemScreenState extends State<AddItemScreen> {
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
-           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      HomeScreen()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HomeScreen()));
         },
         child: Text(
           "Go Back",
@@ -144,7 +140,6 @@ class _AddItemScreenState extends State<AddItemScreen> {
         ),
       ),
     );
-
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -186,7 +181,6 @@ class _AddItemScreenState extends State<AddItemScreen> {
                     SizedBox(height: 25),
                     goBackButton,
                     SizedBox(height: 25),
-                     
                   ],
                 ),
               ),
@@ -196,39 +190,4 @@ class _AddItemScreenState extends State<AddItemScreen> {
       ),
     );
   }
-
-  // void AddItem(String itemname, String expiry) async {
-  //   if (_formKey.currentState!.validate()) {
-  //     await _auth
-  //         .currentUser
-  //         .then((value) => {postDetailsToFirestore()})
-  //         .catchError((e) {
-  //       Fluttertoast.showToast(msg: e!.message);
-  //     });
-  //   }
-  // }
-  
-  // postDetailsToFirestore() async {
-  //   // calling our firestore
-  //   // calling our user model
-  //   // sedning these values
-
-  //   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-
-  //   itemModel ItemModel = itemModel();
-  //   // writing all the values
-  //   itemModel.itemname = ItemNameEditingController.text;
-  //   itemModel.expiry = ExpiryDateEditingController.text;
-
-  //   await firebaseFirestore
-  //       .collection("items")
-  //       .doc()
-  //       .set(itemModel.toMap());
-  //   Fluttertoast.showToast(msg: "Item added successfully :) ");
-
-  //   Navigator.pushAndRemoveUntil(
-  //       (context),
-  //       MaterialPageRoute(builder: (context) => HomeScreen()),
-  //       (route) => false);
-  // }
 }
