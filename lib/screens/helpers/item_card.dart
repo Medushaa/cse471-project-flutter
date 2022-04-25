@@ -14,25 +14,54 @@ class itemCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0),
-                      child: Text("Item Name: ${_item.itemName}"),
+            children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    child: Text("Item Name: ${_item.itemName}"),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      "  Donate",
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
                     ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Spacer(),
-                    Text("Expiry Date: ${DateFormat('MM/dd/yyyy').format(_item.expirydate!).toString()}"),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      //FirebaseFirestore.instance.collection("chats").document("ROOM_1")
+                      //                     .collection("messages").document(snapshot.data.documents[index]["id"])
+                      //                     .delete();
+                    },
+                    child: Text(
+                      "   Delete",
+                      style: TextStyle(
+                        color: Colors.deepOrange,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                  Text(
+                      "Expiry Date: ${DateFormat('MM/dd/yyyy').format(_item.expirydate!).toString()}"),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
+
+
 }
