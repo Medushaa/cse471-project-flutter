@@ -26,7 +26,9 @@ class itemCard extends StatelessWidget {
               Row(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+
+                    },
                     child: Text(
                       "  Donate",
                       style: TextStyle(
@@ -38,9 +40,7 @@ class itemCard extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      //FirebaseFirestore.instance.collection("chats").document("ROOM_1")
-                      //                     .collection("messages").document(snapshot.data.documents[index]["id"])
-                      //                     .delete();
+                      //await FirebaseFirestore.instance.collection("users").document("RO).collection("messages").document(snapshot.data.documents[index]["id"]).delete();
                     },
                     child: Text(
                       "   Delete",
