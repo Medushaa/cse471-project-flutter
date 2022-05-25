@@ -70,12 +70,16 @@ class _DonationPageState extends State<DonationPage> {
         ),
       ),
       body: SafeArea(
-        child: ListView.builder(
-          itemCount: _ItemList.length,
-          itemBuilder: (content, index) {
-            return itemCard(_ItemList[index] as itemModel);
-          },
-        ),
+        child: 
+        
+        Center(child: Text("Not Available yet")),
+        
+        // ListView.builder(
+        //   itemCount: _ItemList.length,
+        //   itemBuilder: (content, index) {
+        //     return itemCard(_ItemList[index] as itemModel);
+        //   },
+        // ),
       ),
     );
   }

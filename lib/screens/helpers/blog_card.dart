@@ -4,6 +4,15 @@ import 'package:food_um_try1/screens/home_page.dart';
 import 'package:food_um_try1/screens/model/blog_model.dart';
 import 'package:intl/intl.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
+void main() => runApp(
+  MaterialApp(
+    home: BlogPage(),
+    navigatorKey: navigatorKey, // Setting a global key for navigator
+  ),
+);
+
 class blogCard extends StatelessWidget {
   final blogModel _blog;
 
@@ -13,6 +22,7 @@ class blogCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Card(
+        color: Color.fromARGB(255, 250, 255, 210),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
@@ -35,6 +45,22 @@ class blogCard extends StatelessWidget {
                   GestureDetector(
                     //when the text is pressed
                     onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title:
+                              Text("${_blog.title}"),
+                          content: Text("${_blog.blog_body!}"),
+                          actions: [
+                            TextButton(
+                              child: Text("Nice"),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
+                        ),
+                      );
                     },
                     child: Text(
                       "Veiw Blog",
@@ -53,21 +79,4 @@ class blogCard extends StatelessWidget {
       ),
     );
   }
-  // Future openBlog() => showDialog(
-  //     context: Context,
-  //     builder: (context) => AlertDialog(
-  //       title:
-  //           Text("Blog Title: ${_blog.title}"),
-  //       actions: [
-  //         TextButton(
-  //           child: Text("Go Back"),
-  //           onPressed: () {
-  //             Navigator.push(context,
-  //               MaterialPageRoute(builder: (context) => BlogPage()));
-  //           },
-  //         ),
-  //       ],
-  //     ),
-  //   );
-
 }
